@@ -1,0 +1,176 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "rgName": {
+        "value": "myResourceGroup"
+      },
+      "vnetHubName": {
+        "value": "myHubVNet"
+      },
+      "hubVNETaddPrefixes": {
+        "value": ["10.0.0.0/16"]
+      },
+      "azfwName": {
+        "value": "myAzureFirewall"
+      },
+      "rtVMSubnetName": {
+        "value": "myVMSubnetRouteTable"
+      },
+      "fwapplicationRuleCollections": {
+        "value": [
+          {
+            "name": "appRuleCollection1",
+            "priority": 100,
+            "action": "Allow",
+            "rules": [
+              {
+                "name": "allowApp1",
+                "sourceAddresses": ["*"],
+                "protocols": [{"protocolType": "Http", "port": 80}],
+                "targetFqdns": ["www.example.com"]
+              }
+            ]
+          }
+        ]
+      },
+      "fwnetworkRuleCollections": {
+        "value": [
+          {
+            "name": "networkRuleCollection1",
+            "priority": 200,
+            "action": "Allow",
+            "rules": [
+              {
+                "name": "allowNetwork1",
+                "sourceAddresses": ["10.0.0.0/16"],
+                "destinationAddresses": ["*"],
+                "destinationPorts": ["80"],
+                "protocols": ["TCP"]
+              }
+            ]
+          }
+        ]
+      },
+      "fwnatRuleCollections": {
+        "value": [
+          {
+            "name": "natRuleCollection1",
+            "priority": 300,
+            "action": "Dnat",
+            "rules": [
+              {
+                "name": "natRule1",
+                "sourceAddresses": ["*"],
+                "destinationAddresses": ["20.30.40.50"],
+                "destinationPorts": ["3389"],
+                "translatedAddress": "10.0.0.4",
+                "translatedPort": "3389",
+                "protocols": ["TCP"]
+              }
+            ]
+          }
+        ]
+      },
+      "location": {
+        "value": "eastus"
+      },
+      "availabilityZones": {
+        "value": ["1", "2", "3"]
+      },
+      "vnetSpokeName": {
+        "value": "mySpokeVNet"
+      },
+      "spokeVNETaddPrefixes": {
+        "value": ["10.1.0.0/16"]
+      },
+      "rtAKSSubnetName": {
+        "value": "myAKSSubnetRouteTable"
+      },
+      "firewallIP": {
+        "value": "20.30.40.50"
+      },
+      "appGatewayName": {
+        "value": "myAppGateway"
+      },
+      "vnetHUBRGName": {
+        "value": "myHubResourceGroup"
+      },
+      "nsgAKSName": {
+        "value": "myAKSNSG"
+      },
+      "nsgAppGWName": {
+        "value": "myAppGWNSG"
+      },
+      "rtAppGWSubnetName": {
+        "value": "myAppGWSubnetRouteTable"
+      },
+      "dnsServers": {
+        "value": ["10.2.0.4", "10.2.0.5"]
+      },
+      "appGwyAutoScale": {
+        "value": {
+          "minCapacity": 2,
+          "maxCapacity": 10
+        }
+      },
+      "securityRules": {
+        "value": []
+      },
+      "appgwname": {
+        "value": "myAppGateway"
+      },
+      "subnetid": {
+        "value": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+      },
+      "appgwpip": {
+        "value": "20.30.40.60"
+      },
+      "vnetName": {
+        "value": "myVNet"
+      },
+      "subnetName": {
+        "value": "mySubnet"
+      },
+      "privateDNSZoneACRName": {
+        "value": "privatelink.azurecr.io"
+      },
+      "privateDNSZoneKVName": {
+        "value": "privatelink.vaultcore.azure.net"
+      },
+      "privateDNSZoneSAName": {
+        "value": "privatelink.file.core.windows.net"
+      },
+      "acrName": {
+        "value": "eslzacr123456"
+      },
+      "keyvaultName": {
+        "value": "eslz-kv-123456"
+      },
+      "storageAccountName": {
+        "value": "eslzsa123456"
+      },
+      "storageAccountType": {
+        "value": "Standard_LRS"
+      },
+      "aksIdentityName": {
+        "value": "myAKSIdentity"
+      },
+      "enableAutoScaling": {
+        "value": true
+      },
+      "autoScalingProfile": {
+        "value": {
+          "minCount": 1,
+          "maxCount": 5
+        }
+      },
+      "aksadminaccessprincipalId": {
+        "value": "00000000-0000-0000-0000-000000000000"
+      },
+      "networkPlugin": {
+        "value": "azure"
+      }
+    }
+  }
+  
