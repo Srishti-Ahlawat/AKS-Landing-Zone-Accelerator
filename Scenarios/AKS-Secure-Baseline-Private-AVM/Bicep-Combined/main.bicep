@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-param rgName string
+param hubRgName string
 param vnetHubName string
 param hubVNETaddPrefixes array
 param azfwName string
@@ -14,7 +14,7 @@ param availabilityZones array
 module network_hub '../Bicep/03-Network-Hub/main.bicep' = {
  name: 'network_hub'
  params:{
-  rgName:rgName
+  rgName:hubRgName
   azfwName:azfwName
   fwapplicationRuleCollections:fwapplicationRuleCollections
   fwnatRuleCollections:fwnatRuleCollections
@@ -27,7 +27,7 @@ module network_hub '../Bicep/03-Network-Hub/main.bicep' = {
 }
 }
 
-
+param spokeRgName string
 param vnetSpokeName string
 param spokeVNETaddPrefixes array
 param rtAKSSubnetName string
@@ -46,7 +46,7 @@ param securityRules array = []
 module network_lz '../Bicep/04-Network-LZ/main.bicep' = {
   name: 'network_lz'
   params:{
-   rgName:rgName
+   rgName:spokeRgName
    availabilityZones:availabilityZones
    location:location
    appGatewayName:appGatewayName
@@ -76,13 +76,13 @@ var backendHttpSettingsCollectionName = 'backend-http-settings'
 
  module network_lz_appgw '../Bicep/04-Network-LZ/appgw.bicep' = {
   name:'network_lz_appgw'
-  scope:resourceGroup(rgName)
+  scope:resourceGroup(spokeRgName)
   params:{
     appgwname:appGatewayName
     appgwpip:appgwpip
     appGwyAutoScale:appGwyAutoScale
     availabilityZones:availabilityZones
-    rgName:rgName
+    rgName:spokeRgName
     subnetid:subnetid
   }
  }
@@ -103,7 +103,7 @@ module aks_supporting '../Bicep/05-AKS-Supporting/main.bicep' = {
     storageAccountType:storageAccountType
     subnetName:subnetName
     vnetName:vnetName
-    rgName:rgName
+    rgName:spokeRgName
   }
  }
 
@@ -129,6 +129,6 @@ param aksadminaccessprincipalId string
     enableAutoScaling:enableAutoScaling
     subnetName:subnetName
     vnetName:vnetName
-    rgName:rgName
+    rgName:spokeRgName
   }
  }

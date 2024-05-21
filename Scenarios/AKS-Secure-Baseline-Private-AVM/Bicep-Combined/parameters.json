@@ -2,17 +2,20 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "rgName": {
-        "value": "myResourceGroup"
+      "spokeRgName": {
+        "value": "ESLZ-SPOKE"
+      },
+      "hubRgName": {
+        "value": "ESLZ-HUB"
       },
       "vnetHubName": {
-        "value": "myHubVNet"
+        "value": "VNet-HUB"
       },
       "hubVNETaddPrefixes": {
         "value": ["10.0.0.0/16"]
       },
       "azfwName": {
-        "value": "myAzureFirewall"
+        "value": "AZFW"
       },
       "rtVMSubnetName": {
         "value": "myVMSubnetRouteTable"
@@ -79,7 +82,7 @@
         "value": ["1", "2", "3"]
       },
       "vnetSpokeName": {
-        "value": "mySpokeVNet"
+        "value": "VNet-SPOKE"
       },
       "spokeVNETaddPrefixes": {
         "value": ["10.1.0.0/16"]
@@ -94,16 +97,16 @@
         "value": "myAppGateway"
       },
       "vnetHUBRGName": {
-        "value": "myHubResourceGroup"
+        "value": "ESLZ-HUB"
       },
       "nsgAKSName": {
-        "value": "myAKSNSG"
+        "value": "AKS-NSG"
       },
       "nsgAppGWName": {
-        "value": "myAppGWNSG"
+        "value": "APPGW-NSG"
       },
       "rtAppGWSubnetName": {
-        "value": "myAppGWSubnetRouteTable"
+        "value": "AppGWSubnet"
       },
       "dnsServers": {
         "value": ["10.2.0.4", "10.2.0.5"]
