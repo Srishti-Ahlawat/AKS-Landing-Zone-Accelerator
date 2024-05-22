@@ -6,6 +6,7 @@ param hubVNETaddPrefixes array
 param azfwName string
 param rtVMSubnetName string
 param fwapplicationRuleCollections array
+param new string
 param fwnetworkRuleCollections array
 param fwnatRuleCollections array
 param location string = deployment().location
